@@ -1,4 +1,4 @@
-import type { MainAppProps } from "#/main";
+import type { MainAppProps } from '#/main';
 import 'uno.css';
 import '/@/design/index.less';
 import 'ant-design-vue/dist/reset.css';
@@ -17,9 +17,9 @@ import { setupI18n } from '/@/locales/setupI18n';
 import { registerGlobComp } from '/@/components/registerGlobComp';
 import { registerThirdComp } from '/@/settings/registerThirdComp';
 import { useSso } from '/@/hooks/web/useSso';
-import { checkIsQiankunMicro } from "/@/qiankun/micro";
-import { autoUseQiankunMicro } from "/@/qiankun/micro/qiankunMicro";
-import { useAppStoreWithOut } from "@/store/modules/app";
+import { checkIsQiankunMicro } from '/@/qiankun/micro';
+import { autoUseQiankunMicro } from '/@/qiankun/micro/qiankunMicro';
+import { useAppStoreWithOut } from '@/store/modules/app';
 
 // 注册online模块lib
 import { registerPackages } from '/@/utils/monorepo/registerPackages';
@@ -29,12 +29,12 @@ async function main() {
   if (checkIsQiankunMicro()) {
     // 【JEECG作为乾坤子应用】以乾坤子应用模式启动
     // await autoUseQiankunMicro(bootstrap)
-    await autoUseQiankunMicro(bootstrap)
+    await autoUseQiankunMicro(bootstrap);
   } else {
     // 获取参数
     const props = getMainAppProps();
     // 普通启动
-    await bootstrap(props)
+    await bootstrap(props);
   }
 }
 
@@ -91,9 +91,9 @@ async function bootstrap(props?: MainAppProps) {
   // 挂载应用
   app.mount(getMountContainer(props), true);
 
-  console.log(" vue3 app 加载完成！")
+  console.log(' vue3 app 加载完成！');
 
-  return app
+  return app;
 }
 
 // 获取应用挂载容器
@@ -119,14 +119,14 @@ function getMainAppProps(): MainAppProps {
   return {
     hideSider,
     hideHeader,
-    hideMultiTabs
-  }
+    hideMultiTabs,
+  };
 }
 
 // 配置主应用参数
 function setupProps(props?: MainAppProps) {
   if (!props) {
-    return
+    return;
   }
   const appStore = useAppStoreWithOut();
   appStore.setMainAppProps(props);

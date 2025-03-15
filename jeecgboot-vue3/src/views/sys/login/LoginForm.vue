@@ -11,19 +11,8 @@
     <!--验证码-->
     <ARow class="enter-x">
       <ACol :span="12">
-        <FormItem name="inputCode" class="enter-x">
-          <Input size="large" v-model:value="formData.inputCode" :placeholder="t('sys.login.inputCode')" style="min-width: 100px" />
-        </FormItem>
-      </ACol>
-      <ACol :span="8">
-        <FormItem :style="{ 'text-align': 'right', 'margin-left': '20px' }" class="enter-x">
-          <img
-            v-if="randCodeData.requestCodeSuccess"
-            style="margin-top: 2px; max-width: initial"
-            :src="randCodeData.randCodeImage"
-            @click="handleChangeCheckCode"
-          />
-          <img v-else style="margin-top: 2px; max-width: initial" src="../../../assets/images/checkcode.png" @click="handleChangeCheckCode" />
+        <FormItem name="googleCode" class="enter-x">
+          <Input size="large" v-model:value="formData.googleCode" :placeholder="t('sys.login.inputCode')" style="min-width: 100px" />
         </FormItem>
       </ACol>
     </ARow>
@@ -124,7 +113,7 @@
   const formData = reactive({
     account: 'admin',
     password: '123456',
-    inputCode: '',
+    googleCode: '',
   });
   const randCodeData = reactive({
     randCodeImage: '',
@@ -147,7 +136,7 @@
         toRaw({
           password: data.password,
           username: data.account,
-          captcha: data.inputCode,
+          captcha: data.googleCode,
           checkKey: randCodeData.checkKey,
           mode: 'none', //不要默认的错误提示
         })
@@ -173,7 +162,7 @@
     }
   }
   function handleChangeCheckCode() {
-    formData.inputCode = '';
+    formData.googleCode = '';
     //TODO 兼容mock和接口，暂时这样处理
     randCodeData.checkKey = 1629428467008; //new Date().getTime();
     getCodeInfo(randCodeData.checkKey).then((res) => {
